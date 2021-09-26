@@ -38,4 +38,13 @@ describe('03_separation-of-concerns-demo routes', () => {
                 expect(res.body).toEqual(order);
             });
     });
+
+    it ('gets all orders from db', async () => {
+        const order = await Order.insert({ quantity: 10 });
+        return request(app)
+            .get('/api/v1/orders')
+            .then((res) => {
+                expect(res.body).toEqual([order]);
+            });
+    });
 });
