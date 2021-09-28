@@ -48,7 +48,7 @@ describe('routes', () => {
             });
     });
 
-    it('patches an order from db', async () => {
+    it('updates an order from db by id', async () => {
         const order = await Order.insert({ quantity: 10 });
         return request(app)
             .put(`/api/v1/orders/${order.id}`)
@@ -59,5 +59,11 @@ describe('routes', () => {
                     quantity: 11,
                 });
             });
+    });
+
+    it('deletes an order from db by id', async () => {
+        const order = await Order.insert({ quantity: 10 });
+        const res = request(app).delete(`/api/v1/orders/${order.id}`);
+        expect(res.body).toEqual({});
     });
 });
