@@ -1,5 +1,5 @@
 const pool = require('../lib/utils/pool');
-const twilio = require('twilio');
+//const twilio = require('twilio');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
@@ -63,7 +63,7 @@ describe('routes', () => {
 
     it('deletes an order from db by id', async () => {
         const order = await Order.insert({ quantity: 10 });
-        const res = request(app).delete(`/api/v1/orders/${order.id}`);
+        const res = await request(app).delete(`/api/v1/orders/${order.id}`);
         expect(res.body).toEqual({});
     });
 });
