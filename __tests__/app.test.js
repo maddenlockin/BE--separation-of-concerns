@@ -48,5 +48,16 @@ describe('routes', () => {
             });
     });
 
-    it('patches an order from db', async () => {});
+    it('patches an order from db', async () => {
+        const order = await Order.updateOrder({ quantity: 11 });
+        return request(app)
+            .patch(`/api/v1/orders/update/${order.id}`)
+            .send({ quantity: 11 })
+            .then((res) => {
+                expect(res.body).toEqual({
+                    id: '1',
+                    quantity: 11,
+                });
+            });
+    });
 });
