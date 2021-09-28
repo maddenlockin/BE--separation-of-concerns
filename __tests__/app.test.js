@@ -31,7 +31,7 @@ describe('routes', () => {
     });
 
     it('gets an order by id', async () => {
-        const order = await Order.insert({ quanity: 10 });
+        const order = await Order.insert({ quantity: 10 });
         return request(app)
             .get(`/api/v1/orders/${order.id}`)
             .then((res) => {
@@ -49,9 +49,9 @@ describe('routes', () => {
     });
 
     it('patches an order from db', async () => {
-        const order = await Order.updateOrder({ quantity: 11 });
+        const order = await Order.insert({ quantity: 10 });
         return request(app)
-            .patch(`/api/v1/orders/update/${order.id}`)
+            .put(`/api/v1/orders/${order.id}`)
             .send({ quantity: 11 })
             .then((res) => {
                 expect(res.body).toEqual({
